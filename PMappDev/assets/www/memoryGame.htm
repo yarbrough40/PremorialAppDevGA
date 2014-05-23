@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Memory Game</title> <!-- link rel="stylesheet" type="text/css" href="style.css" / -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="css/index.css" />-->
+<!-- CSS STYLE -->
+<!-- CSS STYLE -->
+<style>
+body { background-color:transparent; text-align:left;}
+ 
+#title { text-align:center; letter-spacing:0.1em; }
+ 
+div#cntr{/*padding-left: 40px;*/}
+ 
+div.sqr{ display:inline-block; width:249px; height:153px; margin:0px 5px 0px 0px; background-color:#ffffff; overflow:hidden; cursor:pointer; }
+ 
+img.sqr{ width:108%;}
+
+ .timerstyle{
+	font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	color: #ffffff;
+	border: none;
+	font-size:40px;
+}
+</style>
+</head>
+  
+
+
+<body>
+<!-- Containing div for the game panels -->
+  <div id="cntr" class="tablestyle"></div>
+  <p />
+
+	<div class="timerstyle"><label id="LabelTime"></label></div>
+</body> 
+
+
+
+<!-- JAVASCRIPT -->
+<script>
+//*********** Prepare array of elements to match ***********//
+  
+// Declare and define an array of image file names
+var picAry = ['Circle_Fill_Green',
+  'Square_Line_Blue',
+  'Triangle_Fill_Yellow',
+  'Star_Line_Red',
+  'Circle_Line_Green',
+  'Triangle_Line_Yellow',
+  'Square_Fill_Blue',
+  'Star_Fill_Red'
+] 
+
+  
+//Clone images in picAry
+//Get picAry length before runnig function because arrray.length will change as function runs
+var picAryLength = picAry.length;
+
+for (var i=0; i < picAryLength; i++){
+  picAry[i+8] = picAry[i];
+}
+
+// Generate a random value to sort picture array by. (Redesign randomizing function around Knuth shuffle function)
+function randNum(){
+  return 0.5 - Math.random();
+}
+
+//Sort the pictures randomly 
+function randPicAry(){
+  picAry.sort( randNum );
+}
+  
+  
+  
+//*********** Matching Logic ***********//
+  
+// Declare and define a variable that counts whether this is the first or second selection tile to be evaluated
+var pickNo = 0;
+  
+// Declare a function that takes the id and data-nm of a selection tile to evaluate
+function pair(nm, id) {
+  if (pickNo>1) {
+  //If more than two tiles are selected, clear the timer delaying the execution of compare()
+   clearTimeout(t);
+  //Next run compare immediately, matching the open tiles or leaving them open
+   compare();
+   
+  }
+
+  //If just one tile is selected, record it's id and data-nm in the first round of id and data-nm variables
+  if (pickNo==0){
+   nm1 = nm;
+   id1 = id;
+  }
+
+  //If two tiles are selected, record the second round of id and data-nm variables and then excute a set timeout function, calling compare() after 0.9 seconds
+  else {
+   nm2 = nm;
+   id2 = id;
+   t = setTimeout('compare()', 900);
+  }
+
+  pickNo++;
+ 
+}
+ 
+
+// Compare the two data-nms recorded in pair(). If the do not match, hide the tiles selected by their ids
+function compare() {
+  pickNo = 0;
+  if (nm1 != nm2 ) {
+   $('#' + id1).fadeOut(50);
+   $('#' + id2).fadeOut(50);
+  }
+   checkComplete();
+}
+  
+  
+  
+  
+//*********** Setup Tiles to Match ***********//
+  
+// Append selection tiles to the container
+$('#cntr').append(
+  '<div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><br><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><br><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><br><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div><div class="sqr"></div>'
+);
+  
+// Declare and define a variable for the width of the selection tiles
+//var sqrW = $(window).width()/4.8;
+var sqrW = $(window).width()/4.8;
+console.log($(window).width()/4.8);
+console.log("windowWidth: " + $(window).width());
+console.log("iFrameWidth: " + $("#memoryGameFrame").width());
+// Set the width of the container
+$('#cntr').width("100%");
+//$('#cntr').width(sqrW*4+8);
+
+//$('#cntr').css("padding", + $(window).width()/100 + "px");
+//$('#cntr').css("padding", "0px");
+// Set the CSS width and height of the selection tiles 
+$('div.sqr').css({
+//  width: sqrW-4,
+//  height: sqrW*0.6
+  width: sqrW-4,
+  height: sqrW*0.6
+});
+
+  
+// Define a function load that loads the game. Instead of simply by default, this provides a reload function to attach to the reload button
+function load(){
+  pickNo = 0;
+  
+  //Sort picAry randomly 
+  randPicAry();
+  
+  // append a img to div.sqr, ID it and assign a description to the data-nm attribute
+  var i=0;
+  $('div.sqr').each(function(){
+   $(this).empty();
+   $(this).append('<img class="sqr" id="sqr' + i + '" data-nm="' + picAry[i] + '" src="images/memoryGame/' + picAry[i] + '.jpg" />');
+   i++;
+  });
+  
+  // hide those images
+  $('img').hide();
+  startGameTimer();
+}
+
+//$("#btn").click(function(){$("#memoryGameFrame").parent().function($.mobile.changePage("#correct"))});
+
+$("#btn").click(function(){
+parent.gotoCorrect();
+//parent.alert("#correct");
+});
+
+ function checkComplete(){  // CHECK IF 100% COMPLETE MATCHES
+	i = 0;
+  $('img.sqr').each(function(){
+	//console.log($(this).attr('id') + '|' + $(this).css('display'));
+	if ($(this).css('display') =='inline') i = i+1 ;
+  });
+  console.log(i + " matched");
+  if (i==16) parent.gotoCorrect();
+}
+
+// On click, toggle image and evaluate tile match
+$('div.sqr').click(function(){
+  $(this).toggleClass('clicked').children().fadeToggle(100);
+  id = $(this).children().attr('id');
+  nm = $(this).children().attr('data-nm');
+  // Send $These to be evalulated
+  pair(nm, id);
+});
+
+
+// Attach a click event handler to the reload button
+$('#rld').click(function(){
+  load();
+});
+
+function startGameTimer(){
+itime = 25;
+isTiming = true;
+startTimer();
+}
+function stopGameTimer(){
+isTiming = false;
+}
+
+
+var isTiming = false;
+var itime = 25;
+	
+function startTimer(){
+   if (isTiming) {
+	   var lb = document.getElementById('LabelTime');
+	   lb.innerHTML = itime.toString();
+	   var tm = setTimeout("startTimer()", 1000);
+	   itime -= 1;
+	   if(itime < 0){
+	   //stopGameTimer();
+	   //setTimeout(function(){alert("Time Is up!");load();}, 2000);
+		clearTimeout(tm);
+		//if(device.platform){
+		//navigator.notification.alert("Time Is up!",load(),"OOPS!", "Try Again");
+		//}else{
+		//alert("Time Is up!");
+		load();
+		//}
+		
+	   }			   
+   }
+}
+
+
+//Load game on page load
+$(function(){ load(); });
+
+</script>
+</html> 
