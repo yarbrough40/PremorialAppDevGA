@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<!--
+PREMORIAL MADNESS APP
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+		<meta name="viewport" content= "initial-scale=1" />
+		<script type="text/javascript" src="js/pm.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="jqm/jquery.mobile-1.4.0.js"></script>	
+		<script type="text/javascript" src="js/audio.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.0.css" />
+		<!--<link rel="stylesheet" type="text/css" href="jqm/jquery.mobile.theme-1.4.0.css" />-->
+		<link rel="stylesheet" type="text/css" href="jqm/pm.css" />
+		
+        <title>Premorial Madness</title>
+    </head>
+    <body>
+        <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  Main Page   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<div data-role="page" id="main" data-theme="x" class="page-content" >
+		<p />
+   <div id = "maindiv" style="text-align:center;">
+   
+   <table style="width:100%;border-collapse:collapse;">
+    <tr>
+	<td>
+		<table class="tablestyle"><tr><td style="width:10%;">
+			<!--<img id="btnReload" data-role="button" src="img/reload.png" width="40px" />-->
+		</td> <td  style="width:200px;"><label id="lblWelcome"style="font-size:23px">&nbsp;</td>
+		<td style="width:10%;"></td>
+		</tr></table>
+		<hr /> 
+		<!-- <a id="btnTestPage" data-role="button" style="width:100px;" href="#testPage" >testPage</a>-->
+	</td>
+	</tr>
+	
+		
+    </table>
+    <div id="HeaderText" style="padding: 0px 15px 0px 15px; background-color:transparent;"> 
+		
+		<!-- ALL MESSAGE DATA APPEARS HERE -->
+    </div>	
+		<p />
+   <div id = "mainConsole"></div>
+ 
+ <!-- pop up dialog
+	<div class="inputBox" id="ib" >
+		<label id="LabelError" style=""></label>
+		<label id="LabelError" for="txtinputBox" style="color:red;"></label>
+		<textarea name="textarea" id="txtinputBox" style="width:93%; height:150px; margin: 10px 10px 10px 10px; overflow:hidden;font-size:19px;text-align:center;" 
+		placeholder="Type Message To Command Ctr"></textarea>
+
+							
+		<table class="tablestyle">
+		<tr><td style="width:2%;"></td><td style="width:15%;"><a data-role="button" id="btnCancel" class="CancelButton" data-theme="a" data-shadow="true" >Cancel</a></td>
+		<td style="width:35%;"></td><td style="width:65%;"><a data-role="button" id ="btnSendMsg" class="SendMsg" data-theme="x" data-shadow="true" >Send</a></td>
+		</tr>
+		</table>
+	</div> 
+pop up dialog-->
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="a" style="">
+        <table class="FooterTablestyle"><tr>
+            <td style="width:10%;"></td>
+            <td style="width:20%;"><a id="btnMsgDialog" href="#message" data-role="button">Send Message</a></td>
+            <td style="width:15%;"></td>
+            <td style="width:30%;"><a id="btnChallenges" data-role="button" data-icon="arrow-r"  data-iconpos="right" style="width:90%;" data-theme="b">Challenge</a>
+							   <!--<a href="#challenges" data-role="button" data-icon="arrow-r" data-iconpos="right" data-theme="b">to Challenges</a>-->
+            </td>
+
+            <td style="width:20%;"></td>
+            </tr>
+        </table>
+    </div>
+	</div><!-- /content -->	
+</div><!-- /page -->
+
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  challenges XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<div data-role="page" data-theme="x"  id="challenges" style="">
+
+
+			<table class="tablestyle"><tr><td style="width:10%;">
+			<img id="btnReload" data-role="button" src="img/reload.png" width="40px" />
+		</td> <td  style="width:200px;padding-top:20px;"><label id="lblChallenge" style = 'font-size:22px'></label><hr /></td>
+		
+		<td style="width:10%;"></td>
+		</tr></table>
+	<div data-role="content" class="page-content" style="background-color:transparent;" >	
+		<table style="width:100%; text-align:center;">
+          <tr>
+            <td>
+            <!--GAME BOARD-->
+						<div id="GameDiv" style="border: none;">		
+
+
+						</div>
+            </td>
+        </tr>
+        </table>
+	</div><!-- /content -->
+	<!-- <input type="text" id = "txtConsole" value = ""></input>-->
+	<div id="console" style="text-align: center;"></div>
+
+ 
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="a" style="">
+        <table class="FooterTablestyle"><tr>
+            <td style="width:5%;"></td>
+            <td style="width:30%;"><a class="mainButton" data-role="button" style="width:90%;" data-icon="arrow-l"
+                                    data-theme="b" >main</a></td>
+            <td style="width:30%;"></td>
+            <td style="width:30%;">
+						<!--<a href="#correct" data-role="button" 
+                                    data-transition="fade" data-direction="reverse" data-theme="b" data-shadow="true";>correct</a>-->	   
+            </td>
+
+            <td style="width:5%;"></td>
+            </tr>
+        </table>
+    </div>
+	
+
+
+
+</div><!-- /page -->	
+
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  message   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<div data-role="page" id="message" data-theme="x" class="page-content" >
+
+	<div class="sendMessageClass" id="sendMessageDiv" style="padding: 20px 10px 0px 20px" >
+		<label id="LabelError" style=""></label>
+		<label id="LabelError" for="txtinputBox" style="color:red;"></label>
+		<textarea name="textarea" id="txtinputBox" style="width:93%; height:200px; margin: 10px 10px 10px 10px; overflow:hidden;font-size:19px;text-align:center;" 
+		placeholder="Type Message To Command Ctr"></textarea>
+
+							
+		<table class="tablestyle">
+		<tr><td style="width:2%;"></td><td style="width:15%;"><a data-role="button" id="btnCancel" class="CancelButton" data-theme="a" data-shadow="true" >Cancel</a></td>
+		<td style="width:35%;"></td><td style="width:65%;"><a data-role="button" id ="btnSendMsg" class="SendMsg" data-theme="x" data-shadow="true" >Send</a></td>
+		</tr>
+		</table>
+	</div> 
+	
+	
+	<!--	
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="a" style="">
+        <table class="FooterTablestyle"><tr>
+            <td style="width:5%;"></td>
+            <td style="width:20%;"></td>
+            <td style="width:30%;"></td>
+            <td style="width:30%;"><a data-role="button" href="#main"  data-icon="arrow-r" data-iconpos="right" data-theme="b">Main</a>
+							   -->
+            </td>
+
+            <td style="width:10%;"></td>
+            </tr>
+        </table>
+    </div>
+	
+</div><!-- /page -->	
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  CORRECT   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+<div data-role="page" data-theme="x"  id="correct" style="">
+
+
+	<table class="tablestyle" style="text-shadow:0 0 20px #ffffff; color: green;"><tr><td>
+	<label id = "lblCorrect" class="blink" >CORRECT!!!!</label>
+	
+	</td></tr></table>
+		<br /><br /><br /><br />
+		<table class="tablestyle"><tr><td style="width:10%"></td><td>
+			<label id = "lblNextChallengeWait" style="visibility:visible">loading next challenge...</label>
+			<a class="" id = "btnNxtChal" style="visibility:hidden" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">GO TO NEXT CHALLENGE</a>
+		</td><td style="width:10%"></td>
+		</tr></table>
+		
+		
+		
+<!--
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="a" style="">
+        <table class="FooterTablestyle"><tr>
+            <td style="width:5%;"></td>
+            <td style="width:40%;"><a class="mainButton" data-role="button" data-icon="arrow-l" data-iconpos="right" data-theme="b">Main</a></td>
+            <td style="width:10%;"></td>
+            <td style="width:40%;"></td>
+
+            <td style="width:5%;"></td>
+            </tr>
+        </table>
+    </div>
+--> 
+</div><!-- /page -->	
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  testPage   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+<div data-role="page" data-theme="x"  id="testPage" style="">
+
+
+
+         <input type="text" id="testInput" value='device.platform' ></input>
+		<p />
+		<br />
+		<button onclick='eval("("+ $("#testInput").val() + ")")'></button>
+			
+			<table class="tablestyle" style="border: 3px solid #ffffff">
+			<tr><td style="width:5%;"></td>
+				<td style="width:43%;"><img src="images/audioPlay.gif" onclick="playAudio($('#path').val())" /></td>
+			<td style="width:5%;"></td>
+				<td style="width:43%;"><img src="images/audioStop.gif" onclick="stopAudio();" /></td>
+				<td></td style="width:5%;"></tr>
+			</table>
+			
+			<p id="audio_position"></p>
+		<input type="text" id = "path" value = "seventhson.mp3"></input>
+				
+                 
+                </div>
+				<div id="testConsole"></div>
+				
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="x" style="">
+        <table class="FooterTablestyle"><tr>
+            <td style="width:50%;"></td>
+            <td style="width:50%;"><a data-role="button" href="#challenges"  data-icon="arrow-r" data-iconpos="right" data-theme="b">Challenge</a>
+							   
+            </td>
+
+            <td style="width:10%;"></td>
+            </tr>
+        </table>
+    </div>
+	
+</div><!-- /page -->	
+<script type = "text/javascript" async="async">
+
+</script>
+ <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX sign in page XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+<div data-role="page" id="signin" data-theme="x" class="page-content" >
+	
+
+   <div id = "signindiv" style="text-align:center;" data-theme="x" class="page-content">
+		
+		<p id="signinTitle" style="font-size:19px; font-weight: bold;">Loading</p>
+		
+
+		
+		<br /><br /><br />
+		
+		<table class="tablestyle">
+			<tr><td style = "width:15%"></td>
+					<td id="signInTD" style = "width:70%" >
+					<!--
+						<ul data-role="listview" data-theme="x" data-dividertheme="e">
+							<li data-theme="x" data-icon="false"><a href="#main" onclick="signIn('Dyan');">Dyan</a></li>
+							<br /><br /><br />
+							<li data-theme="x" data-icon="false"><a href="#main" onclick="signIn('Brian');">Brian</a></li>
+						</ul>
+					-->
+					</td>
+			<td style = "width:15%"></td></tr>
+		</table>
+		<div id = "signinConsole"></div>
+
+		
+   </div>
+ </div>
+ <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   AUTH   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+ 
+<div data-role="page" id="auth" data-theme="x" class="page-content" >
+	
+
+   <div id = "signindiv" style="text-align:center;" data-theme="x" class="page-content">
+		
+		<p style="font-size:19px; font-weight: bold;">Authorization</p>
+		<br /><br />
+		
+		<table class="tablestyle">
+			<tr>	<td style = "width:15%"></td>
+					<td id="authTD" style = "width:70%">
+						<p style="font-size:19px; font-weight: bold;">Team <label id="lblTeamName">&nbsp;</label></p>
+						<input type="text" name="textBoxCode" id="txtCode" style="font-size:22px;text-align:center;" onclick="$('#labelErrorAuth').html('');this.value='';"
+							value="" onclick="$('#labelErrorAuth').html('');" placeholder="Team Password" />
+							
+							
+						<input type="text" name="textBoxName" id="textBoxName" style="font-size:22px;text-align:center;" onclick="$('#labelErrorAuth').html('');this.value='';"
+						value="" onclick="$('#labelErrorAuth').html('');" placeholder="Your Name"/>
+							
+							<br/><br />
+							<a data-role="button" type="submit" class="" id="btnAuth" data-theme="a" 
+							data-shadow="true">submit</a><p />
+							<label id = "labelErrorAuth" style="font-size:34px; color:#000;"></label> 
+					</td>
+					<td style = "width:15%"></td></tr>
+		</table>
+		<div id = "authConsole"></div>
+
+
+		
+   </div>
+ </div>
+<!-- XXXXXXXXXXXXXXXXX--> 
+<script type = "text/javascript" async="async">
+	function changePageRight(pageId){ setTimeout(function(){$.mobile.changePage('#' + pageId, { transition: "slide"});},0);}  //USE THIS TO CHANGE PAGES WITHOUT BLINKS CAUSED BY DYNAMIC CONTENT LOADING
+	function changePageLeft(pageId){ setTimeout(function(){$.mobile.changePage('#' + pageId, { transition: "slide",reverse: true});},0);}  //USE THIS TO CHANGE PAGES WITHOUT BLINKS CAUSED BY DYNAMIC CONTENT LOADING
+	//data-transition="reverse slide"
+	var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		try{
+			pictureSource=navigator.camera.PictureSourceType;
+			destinationType=navigator.camera.DestinationType;
+			//ll = (document.URL.slice(0,14) == "file:///G:/RAD") ? "123|456" : myLatLon();
+			document.addEventListener("backbutton", function(e){
+				if($.mobile.activePage.is('#main')){
+					e.preventDefault();
+					navigator.app.exitApp();
+				}
+				
+				else {
+				$.mobile.changePage('#main');
+					//navigator.app.backHistory()
+				}
+			}, false);
+		}catch(e){
+			authLog(e.message);
+			mainLog(e.message);
+		}	
+	}
+/*
+    setTimeout(function () {
+         //ASYCHRONOUS CALL
+    }, 1);
+*/
+
+
+      var isListeningForLogMessage = false;   ///LOOP TO LISTEN FOR MESSAGES
+       function listenForLogMessage() {
+           if (isListeningForLogMessage) {
+			   getMainLogMessage()
+			   //console.log("hit")
+               setTimeout("listenForLogMessage()", 10000);
+           }
+       }
+	   
+	   
+	   
+	$(document).delegate('#main', 'pageshow', function () {  //PAGE LOAD EVENT 
+		$("[data-role=footer]").show();
+	  setTimeout(function() {
+		window.scrollTo(0,1000); console.log("scroll bottom");
+		window.scrollTo(0,0); console.log("scroll top");
+		}, 500);
+			
+			
+		if (window.localStorage.getItem('isAuthenticated') == null || window.localStorage.getItem('isAuthenticated') == false){
+			$.mobile.changePage("#signin");
+			
+			
+		}else{
+			if($("#lblWelcome").val() =="" && window.localStorage.getItem('isAuthenticated') == 'true'){
+			    $('#lblWelcome').html('Welcome&nbsp;Team&nbsp;' + window.localStorage.getItem('team'));				
+				$("#HeaderText").html(window.localStorage.getItem('splashMessage'));
+				setPageThemes(window.localStorage.getItem("theme"));
+				displayCurrentChallenge();
+				getSplash();
+				isListeningForLogMessage = true;
+				listenForLogMessage();
+				//updateLocation();
+			}
+			
+
+		}
+		
+    });
+	
+	$(document).delegate('#challenges', 'pageshow', function () {  //PAGE LOAD EVENT 
+		isListeningForLogMessage = false;
+		$("#lblCorrect").css("font-size","8px");	
+		if($('#GameDiv').html().indexOf("iframe") > 0) displayCurrentChallenge(); //re-render the page if an iFrame is present
+		consoleLog("c"); //clears out the game dive console message
+		updateLocation();
+	});	
+	
+
+	
+	$(document).delegate('#signin', 'pageshow', function () {  //PAGE LOAD EVENT 
+		isListeningForLogMessage = false;
+		getSignInPage();
+		
+	});
+	
+	$(document).delegate('#auth', 'pageshow', function () {  //PAGE LOAD EVENT 
+		isListeningForLogMessage = false;
+		
+	});
+	
+	$(document).delegate('#correct', 'pageshow', function () {  //PAGE LOAD EVENT 
+	isListeningForLogMessage = false;
+	var w = $(window).width();
+	$("#lblCorrect").animate({fontSize: (w/7) + "px"});
+	updateChallengeStatus(true);
+	
+	//getCurrentChallenge();
+	/*
+		$("#lblCorrect").animate({
+		  //left:'250px',
+		  //height:'+=150px',
+		  //width:'+=150px'
+		  font-size:'+=10px'
+		});
+	*/
+
+	});	  
+
+	$("#btnChallenges").bind("click", function (event, ui) {changePageRight('challenges');})
+	$("#btnNxtChal").bind("click", function (event, ui) {
+		changePageLeft('challenges');
+		$("#btnNxtChal").css("visibility","hidden");  $("#lblNextChallengeWait").css("visibility","visible");
+	
+	})
+	
+
+	$(".mainButton").bind("click", function (event, ui) {changePageLeft('main');})
+	$("#btnReload").bind("click", function (event, ui) {
+		//console.log($.mobile.activePage.attr("id"));
+		getSplash();
+		getCurrentChallenge();
+	
+	})
+	
+
+	$("#btnSendMsg").bind("click", function (event, ui) {
+	//console.log($.mobile.activePage.attr("id"));
+		msg = $("#txtinputBox").val();
+		
+		if(msg.toLowerCase() == 'seek'){
+			$.mobile.changePage("#main");
+			localStorage.removeItem("isAuthenticated");$("body").trigger("create");location.reload();
+		}else{
+			sendTeamPost("gen",msg);
+			mainLog("<br /><i>sending: (" + msg + ")</i>");
+			//$(".inputBox").css("visibility","hidden")
+			$("#txtinputBox").val('');
+			$.mobile.changePage("#main");
+		}
+	})
+	
+    $(".CancelButton").bind("click", function (event, ui) {
+
+        //$('.inputBox').attr("style", "visibility: hidden")
+        //$('#MainMsgBoxDiv').attr("style", "visibility: hidden");
+        //$('#NameDiv').attr("style", "visibility: hidden");
+        $('#txtinputBox').val('');
+        $('#LabelError').html = '';
+		$.mobile.changePage("#main");
+        //$("div:jqmData(role='footer')").show();
+		//$.mobile.changePage( url, { reloadPage: true, transition: "none"} );
+		//refreshPage();
+		//setTimeout(function(){$("[data-role=footer]").show();},500)
+        //$('#mainConsole').trigger('create');	
+		//$("[data-role=footer]").trigger('create')
+		
+    });
+
+    $("#BackButton1").bind("click", function (event, ui) {
+        //closePostBox();
+        //$('.inputBox').attr("style", "visibility: hidden")
+        $('#textarea-a').val('');
+        $('#LabelError').html = '';
+    });
+    $("#btnMsgDialog").bind("click", function (event, ui) {
+        //closePostBox();
+        //$(".inputBox").css("visibility","visible");
+    });
+	
+ 
+	$("#btnAuth").bind("click", function(event, ui){
+	//if password matches what's in the box then setTeam()
+	
+	try{
+		if ($("#textBoxName").val().length > 1){
+				txt = $("#txtCode").val().toUpperCase()
+				
+				if (txt == window.localStorage.getItem("password").toUpperCase() || txt == "SEEK" ){
+					console.log("correct password entered: " + window.localStorage.getItem("password") );
+					window.localStorage.setItem('isAuthenticated',true);
+					window.localStorage.setItem('UserName',$("#textBoxName").val());
+					window.localStorage.setItem('PlayerId',Math.random().toString().slice(10));
+					sendNewTeamMember();
+					setTeam();
+					$('#lblWelcome').html('Welcome&nbsp;Team&nbsp;' + window.localStorage.getItem('team'));
+					setPageThemes(window.localStorage.getItem("theme"));
+					getCurrentChallenge();
+				}else{
+					console.log("passord incorrect.  The pw is: " + window.localStorage.getItem("password") + " and you entered: " + $("#txtCode").val());
+					$("#labelErrorAuth").html("INCORRECT PASSWORD");
+				}	
+			}else{
+				$("#labelErrorAuth").html("Enter A Valid Name");
+		}
+	}catch(e){
+		authLog(e.message);
+		}
+	});
+
+	function gotoCorrect(){
+		$.mobile.changePage("#correct");
+	}
+	
+	
+	
+	//$('#testDiv').trigger('create'); 
+	
+	/*
+	$(".ClassName").bind("click", function(event, ui){
+	//do stuff
+	});
+	*/
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function onPhotoDataSuccess(imageData) {
+	//$("#testPicDiv").html($("#testPicDiv").html() + '<br> onPhotoDataSuccess');
+	
+      // Uncomment to view the base64 encoded image data
+      // console.log(imageData);
+
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
+
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+	  smallImage2.src = imageData;
+	  consoleLog(smallImage2.src);
+	  $("#txtImage").val(imageData);
+	  $("#testPicDiv").html($("#testPicDiv").html() + '<br> imageData= ' + imageData);
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+	$("#testPicDiv").html($("#testPicDiv").html() + '<br> onPhotoURISuccess');
+      // Uncomment to view the image file URI 
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
+
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    function capturePhoto() {
+	$("#testPicDiv").html($("#testPicDiv").html() + '<br> capturePhoto');
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+
+	function capturePhotoB64(){
+	
+	}
+	
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+	$("#testPicDiv").html($("#testPicDiv").html() + '<br> capturePhotoEdit');
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true }); 
+    }
+
+    // A button will call this function
+    //
+    function getPhoto(source) {
+	$("#testPicDiv").html($("#testPicDiv").html() + '<br> getPhoto');
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    // 
+    function onFail(message) {
+	$("#testPicDiv").html($("#testPicDiv").html() + '<br> onFail(): ' + message);
+      navigator.notification.alert('Failed because: ' + message);
+    }
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	function setPic(){
+		var txtImage = document.getElementById('txtImage');
+		var smallImage = document.getElementById('smallImage');
+		smallImage.src = txtImage.value;
+	}
+	
+		function encodeImageUri(imageUri){
+     var c=document.createElement('canvas');
+     var ctx=c.getContext("2d");
+     var img=new Image();
+     img.onload = function(){
+       c.width=this.width;
+       c.height=this.height;
+       ctx.drawImage(img, 0,0);
+     };
+     img.src=imageUri;
+     var dataURL = c.toDataURL("image/jpeg");
+     return dataURL ;
+}
+
+	function consoleLog(msg){
+	if(msg == "c"){
+	$("#console").html("");
+	}
+	else{
+		if(msg == "ls"){
+			s = window.localStorage.getItem("imageData");
+			$("#console").html(s);
+		}
+		else{
+		 $("#console").html($("#console").html() + msg + "<br />");
+		 }
+	}
+}	
+	function authLog(msg){
+		if(msg == "c"){$("#authConsole").html("");}else{
+			$("#authConsole").html($("#authconsole").html() + msg + "<br />");
+		}
+	}
+	
+		function mainLog(msg){
+		if(msg == "c"){$("#mainConsole").html("");}else{
+			$("#mainConsole").html($("#mainConsole").html() + msg + "<br />");
+		}
+	}
+	
+	function testLog(msg){
+			if(msg == "c"){$("#testConsole").html("");}else{
+			$("#testConsole").html($("#testConsole").html() + msg + "<br />");
+		}
+	
+	}
+	
+	function signinLog(msg){
+			if(msg == "c"){$("#signinConsole").html("");}else{
+			$("#signinConsole").html($("#signinConsole").html() + msg + "<br />");
+		}
+	
+	}
+	
+	
+	/*
+ * Fix for footer when the keyboard is displayed
+
+$(document).on('focus', 'input, textarea', function() 
+{
+	$.mobile.activePage.find("div[data-role='footer']").hide();
+});
+
+$(document).on('blur', 'input, textarea', function() 
+{
+	$.mobile.activePage.find("div[data-role='footer']").show();
+});
+ */
+ 
+ var initialScreenSize = window.innerHeight;
+window.addEventListener("resize", function() {
+    if(window.innerHeight < initialScreenSize){
+        $("[data-role=footer]").hide();
+    }
+    else{
+	$("[data-role=footer]").show();
+	
+	//setTimeout(function(){$("[data-role=footer]").show();},500)
+        //$('#mainConsole').trigger('create');
+		
+		//$("[data-role=page]").trigger('create')
+    }
+});
+
+function refreshPage() {
+  $.mobile.changePage(
+    window.location.href,
+    {
+      allowSamePageTransition : true,
+      transition              : 'none',
+      showLoadMsg             : false,
+      reloadPage              : true
+    }
+  );
+}
+
+$(document).on('blur', 'input, textarea', function() {
+    setTimeout(function() {
+        window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+		console.log("rescroll");
+		$("[data-role=footer]").show();
+    }, 0);
+});
+
+	//b = eval("("+ "alert('hi')" + ")");
+</script>		
+<script type = "text/javascript">
+
+
+</script>		
+	
+	<!--    -->
+	   	  
+		<script type="text/javascript" src="cordova.js"  charset="utf-8">//2.9.1</script> 
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+
+            app.initialize();
+
+        </script>
+		
+    </body>
+</html>
