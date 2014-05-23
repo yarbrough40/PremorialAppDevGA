@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.brian.Premorial"
+	version 	= "1.0.0">
+
+	<name>Premorial</name>
+
+	<description>
+		Premorial Madness 2014
+	</description>
+  <gap:splash src="splash.png" />
+
+  <author href="http://yarbrough40.com"
+		email="yarbrough40@yahoo.com">
+	</author>
+
+  <icon gap:role="default" src="icon.png"/>
+	<icon gap:density="ldpi" gap:platform="android" src="icon.png" />
+	<icon gap:density="mdpi" gap:platform="android" src="icon.png" />
+	<icon gap:density="hdpi" gap:platform="android" src="icon.png" />
+	<icon gap:density="xhdpi" gap:platform="android" src="icon.png" />
+  <!--<icon gap:platform="ios" height="57" src="icon.png" width="57" />-->
+
+
+
+	<feature name="http://api.phonegap.com/1.0/camera"/>
+	<feature name="http://api.phonegap.com/1.0/file"/>
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/media"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/notification"/>
+	<feature name="Vibration">
+        <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+	<feature name="Geolocation">
+    <param name="ios-package" value="CDVLocation" />
+</feature>
+  <!--<preference name="phonegap-version" value="2.9.0" />-->
+  <preference name="orientation" value="portrait" />
+  <preference name="splash-screen-duration" value="6000" />
+  <gap:plugin name="org.apache.cordova.core.camera" />
+  <gap:plugin name="org.apache.cordova.core.geolocation" />
+  <gap:plugin name="org.apache.cordova.media" version="0.2.8" />
+  <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
+  <gap:plugin name="org.apache.cordova.dialogs" />
+  <!--<gap:plugin name="org.apache.cordova.media" />-->
+  
+<!--<plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />-->
+  
+</widget>
